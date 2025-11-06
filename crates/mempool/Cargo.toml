@@ -1,0 +1,29 @@
+[package]
+name = "mempool"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# Workspace dependencies
+types = { path = "../types" }
+
+# Ethereum
+ethers.workspace = true
+
+# Async
+tokio.workspace = true
+tokio-util.workspace = true
+futures.workspace = true
+async-trait.workspace = true
+
+# Logging
+tracing.workspace = true
+
+# Utilities
+anyhow.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+tokio-test = "0.4"

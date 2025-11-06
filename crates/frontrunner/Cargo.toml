@@ -1,0 +1,42 @@
+[package]
+name = "frontrunner"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "frontrunner"
+path = "src/main.rs"
+
+[dependencies]
+# Workspace crates
+types = { path = "../types" }
+mempool = { path = "../mempool" }
+simulator = { path = "../simulator" }
+executor = { path = "../executor" }
+
+# Ethereum
+ethers.workspace = true
+
+# Async
+tokio.workspace = true
+futures.workspace = true
+
+# Configuration
+config.workspace = true
+dotenvy.workspace = true
+
+# Logging
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+# Metrics
+prometheus.workspace = true
+axum.workspace = true
+
+# Database
+sqlx.workspace = true
+
+# Utilities
+anyhow.workspace = true

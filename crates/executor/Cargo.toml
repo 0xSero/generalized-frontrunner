@@ -1,0 +1,30 @@
+[package]
+name = "executor"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# Workspace dependencies
+types = { path = "../types" }
+
+# Ethereum
+ethers.workspace = true
+
+# Async
+tokio.workspace = true
+async-trait.workspace = true
+futures.workspace = true
+
+# Logging
+tracing.workspace = true
+
+# Utilities
+anyhow.workspace = true
+thiserror.workspace = true
+hex.workspace = true
+sha2.workspace = true
+
+[dev-dependencies]
+tokio-test = "0.4"
