@@ -9,6 +9,7 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 mod orchestrator;
 mod metrics;
+mod database;
 
 use orchestrator::Orchestrator;
 

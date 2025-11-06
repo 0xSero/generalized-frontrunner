@@ -112,11 +112,36 @@ impl Transaction {
     pub fn effective_gas_price(&self, base_fee: U256) -> U256 {
         if let (Some(max_fee), Some(priority_fee)) = (self.max_fee_per_gas, self.max_priority_fee_per_gas) {
             // EIP-1559
-            let max_priority = std::cmp::min(priority_fee, max_fee - base_fee);
+            let max_priority = std::cmp::min(priority_fee, max_fee.saturating_sub(base_fee));
             base_fee + max_priority
         } else {
             // Legacy
             self.gas_price.unwrap_or_default()
+        }
+    }
+
+    /// Create a modified copy of this transaction for frontrunning
+    pub fn create_frontrun_copy(
+        &self,
+        new_from: Address,
+        new_data: Bytes,
+        new_nonce: U64,
+    ) -> Self {
+        Self {
+            id: Uuid::new_v4(),
+            hash: H256::zero(), // Will be set when signed
+            from: new_from,
+            to: self.to,
+            value: self.value,
+            gas_price: self.gas_price,
+            max_fee_per_gas: self.max_fee_per_gas,
+            max_priority_fee_per_gas: self.max_priority_fee_per_gas,
+            gas_limit: self.gas_limit,
+            nonce: new_nonce,
+            data: new_data,
+            status: TransactionStatus::Pending,
+            created_at: Utc::now(),
+            updated_at: Utc::now(),
         }
     }
 }
